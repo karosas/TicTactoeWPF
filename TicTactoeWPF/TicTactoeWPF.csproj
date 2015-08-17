@@ -98,6 +98,12 @@
   <ItemGroup>
     <Folder Include="ViewModel\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TicTacToeWPF.Core\TicTacToeWPF.Core.csproj">
+      <Project>{f8ee7602-5167-40b6-bf2a-f32b44adb776}</Project>
+      <Name>TicTacToeWPF.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

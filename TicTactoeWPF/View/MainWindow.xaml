@@ -25,15 +25,15 @@ Color="White" Offset="1"/>
             </Rectangle.Fill>
         </Rectangle>
         <Grid x:Name="BtnPanel" Margin="101,10,102,52">
-            <Button x:Name="Btn1" Content="" Click="Button_Click" FontSize="36"  HorizontalAlignment="Right" Height="50.667" Margin="0" VerticalAlignment="Top" Width="59"/>
-            <Button x:Name="Btn2" Content="" Click="Button_Click" FontSize="36" Height="50.667" Margin="74,0,64,0" VerticalAlignment="Top"/>
-            <Button x:Name="Btn3" Content="" Click="Button_Click" FontSize="36" HorizontalAlignment="Left" Height="50.667" Margin="10,0,0,0" VerticalAlignment="Top" Width="59"/>
-            <Button x:Name="Btn4" Content="" Click="Button_Click" FontSize="36" HorizontalAlignment="Right" Margin="0,55.667,0,69.333" Width="59"/>
-            <Button x:Name="Btn5" Content="" Click="Button_Click" FontSize="36" Margin="74,55.667,64,69.333"/>
-            <Button x:Name="Btn6" Content="" Click="Button_Click" FontSize="36" HorizontalAlignment="Left" Margin="10,55.667,0,69.333" Width="59"/>
-            <Button x:Name="Btn7" Content="" Click="Button_Click" FontSize="36" HorizontalAlignment="Right" Height="54.333" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="59"/>
-            <Button x:Name="Btn8" Content="" Click="Button_Click" FontSize="36" Height="54.333" Margin="74,0,64,10" VerticalAlignment="Bottom"/>
-            <Button x:Name="Btn9" Content="" Click="Button_Click" FontSize="36" HorizontalAlignment="Left" Height="54.333" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="59"/>
+            <Button x:Name="Btn3" Content="{Binding Game.Grid[2]}"  Click="Button_Click" FontSize="36"  HorizontalAlignment="Right" Height="50.667" Margin="0" VerticalAlignment="Top" Width="59"/>
+            <Button x:Name="Btn2" Content="{Binding Game.Grid[1]}" Click="Button_Click" FontSize="36" Height="50.667" Margin="74,0,64,0" VerticalAlignment="Top"/>
+            <Button x:Name="Btn1" Content="{Binding Game.Grid[0]}" Click="Button_Click" FontSize="36" HorizontalAlignment="Left" Height="50.667" Margin="10,0,0,0" VerticalAlignment="Top" Width="59"/>
+            <Button x:Name="Btn6" Content="{Binding Game.Grid[5]}" Click="Button_Click" FontSize="36" HorizontalAlignment="Right" Margin="0,55.667,0,69.333" Width="59"/>
+            <Button x:Name="Btn5" Content="{Binding Game.Grid[4]}" Click="Button_Click" FontSize="36" Margin="74,55.667,64,69.333"/>
+            <Button x:Name="Btn4" Content="{Binding Game.Grid[3]}" Click="Button_Click" FontSize="36" HorizontalAlignment="Left" Margin="10,55.667,0,69.333" Width="59"/>
+            <Button x:Name="Btn9" Content="{Binding Game.Grid[8]}" Click="Button_Click" FontSize="36" HorizontalAlignment="Right" Height="54.333" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="59"/>
+            <Button x:Name="Btn8" Content="{Binding Game.Grid[7]}" Click="Button_Click" FontSize="36" Height="54.333" Margin="74,0,64,10" VerticalAlignment="Bottom"/>
+            <Button x:Name="Btn7" Content="{Binding Game.Grid[6]}" Click="Button_Click" FontSize="36" HorizontalAlignment="Left" Height="54.333" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="59"/>
         </Grid>
         <Button x:Name="button" Content="RESET" Click="Reset_Click" HorizontalAlignment="Right" Height="37" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="112"/>
         <TextBlock x:Name="textBlock" Foreground="White" HorizontalAlignment="Left" Height="30" Margin="10,0,0,17" TextWrapping="Wrap" Text="Player Turn: " VerticalAlignment="Bottom" Width="64"/>

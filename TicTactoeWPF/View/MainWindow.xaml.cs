@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TicTacToeWPF.Core.ViewModel;
 
 namespace TicTactoeWPF
 {
@@ -23,10 +24,13 @@ namespace TicTactoeWPF
 
         private int turn;
         private int i, j;
+        private MainViewModel viewModel;
         public MainWindow()
         {
             InitializeComponent();
             turn = 1;
+            viewModel = new MainViewModel();
+            BtnPanel.DataContext = viewModel;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
