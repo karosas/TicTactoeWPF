@@ -18,7 +18,7 @@ namespace TicTacToeWPF.Core.ViewModel
         public MainViewModel()
         {
             _game = new Game();
-            
+            ButtonsEnabled = true;
         }
 
         public ICommand GameCommand
@@ -44,7 +44,13 @@ namespace TicTacToeWPF.Core.ViewModel
         private void ExecuteCommand(object o)
         {
             Game.makeMove(Convert.ToInt32((string)o)-1);
+            if(Game.GameEnd)
+            {
+                
+            }
         }
+
+        public bool ButtonsEnabled { get; set; }
 
         public Game Game
         {

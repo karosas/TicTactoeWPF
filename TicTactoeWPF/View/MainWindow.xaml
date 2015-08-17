@@ -26,7 +26,8 @@ Color="White" Offset="1"/>
         </Rectangle>
         <Grid x:Name="BtnPanel" Margin="101,10,102,52">
             <Button x:Name="Btn3" Content="{Binding Game.Grid[2], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                    Command="{Binding GameCommand}" CommandParameter="3" FontSize="36"  HorizontalAlignment="Right" Height="50.667" Margin="0" VerticalAlignment="Top" Width="59"/>
+                    Command="{Binding GameCommand}" CommandParameter="3" FontSize="36" IsEnabled="{Binding ButtonsEnabled}"
+                    HorizontalAlignment="Right" Height="50.667" Margin="0" VerticalAlignment="Top" Width="59"/>
             <Button x:Name="Btn2" Content="{Binding Game.Grid[1], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                     Command="{Binding GameCommand}" CommandParameter="2" FontSize="36" Height="50.667" Margin="74,0,64,0" VerticalAlignment="Top"/>
             <Button x:Name="Btn1" Content="{Binding Game.Grid[0], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Game.cs" />
+    <Compile Include="Model\IDialogService.cs" />
     <Compile Include="Model\Observable.cs" />
     <Compile Include="Model\RelayCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
