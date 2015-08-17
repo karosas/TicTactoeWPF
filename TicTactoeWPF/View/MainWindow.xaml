@@ -24,18 +24,19 @@ Color="White" Offset="1"/>
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Grid Margin="101,10,102.333,66.333">
-            <Button x:Name="Btn1" Content="" HorizontalAlignment="Right" Height="50.667" Margin="0" VerticalAlignment="Top" Width="59"/>
-            <Button x:Name="Btn2" Content="" Height="50.667" Margin="74,0,64,0" VerticalAlignment="Top"/>
-            <Button x:Name="Btn3" Content="" HorizontalAlignment="Left" Height="50.667" Margin="10,0,0,0" VerticalAlignment="Top" Width="59"/>
-            <Button x:Name="Btn4" Content="" HorizontalAlignment="Right" Margin="0,55.667,0,69.333" Width="59"/>
-            <Button x:Name="Btn5" Content="" Margin="74,55.667,64,69.333"/>
-            <Button x:Name="Btn6" Content="" HorizontalAlignment="Left" Margin="10,55.667,0,69.333" Width="59"/>
-            <Button x:Name="Btn7" Content="" HorizontalAlignment="Right" Height="54.333" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="59"/>
-            <Button x:Name="Btn8" Content="" Height="54.333" Margin="74,0,64,10" VerticalAlignment="Bottom"/>
-            <Button x:Name="Btn9" Content="" HorizontalAlignment="Left" Height="54.333" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="59"/>
+        <Grid x:Name="BtnPanel" Margin="101,10,102,52">
+            <Button x:Name="Btn1" Content="" Click="Button_Click" FontSize="36"  HorizontalAlignment="Right" Height="50.667" Margin="0" VerticalAlignment="Top" Width="59"/>
+            <Button x:Name="Btn2" Content="" Click="Button_Click" FontSize="36" Height="50.667" Margin="74,0,64,0" VerticalAlignment="Top"/>
+            <Button x:Name="Btn3" Content="" Click="Button_Click" FontSize="36" HorizontalAlignment="Left" Height="50.667" Margin="10,0,0,0" VerticalAlignment="Top" Width="59"/>
+            <Button x:Name="Btn4" Content="" Click="Button_Click" FontSize="36" HorizontalAlignment="Right" Margin="0,55.667,0,69.333" Width="59"/>
+            <Button x:Name="Btn5" Content="" Click="Button_Click" FontSize="36" Margin="74,55.667,64,69.333"/>
+            <Button x:Name="Btn6" Content="" Click="Button_Click" FontSize="36" HorizontalAlignment="Left" Margin="10,55.667,0,69.333" Width="59"/>
+            <Button x:Name="Btn7" Content="" Click="Button_Click" FontSize="36" HorizontalAlignment="Right" Height="54.333" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="59"/>
+            <Button x:Name="Btn8" Content="" Click="Button_Click" FontSize="36" Height="54.333" Margin="74,0,64,10" VerticalAlignment="Bottom"/>
+            <Button x:Name="Btn9" Content="" Click="Button_Click" FontSize="36" HorizontalAlignment="Left" Height="54.333" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="59"/>
         </Grid>
-        <Button x:Name="button" Content="RESET" HorizontalAlignment="Right" Height="37" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="112"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="30.333" Margin="10,0,0,36" TextWrapping="Wrap" Text="Player Turn: " VerticalAlignment="Bottom" Width="91"/>
+        <Button x:Name="button" Content="RESET" Click="Reset_Click" HorizontalAlignment="Right" Height="37" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="112"/>
+        <TextBlock x:Name="textBlock" Foreground="White" HorizontalAlignment="Left" Height="30" Margin="10,0,0,17" TextWrapping="Wrap" Text="Player Turn: " VerticalAlignment="Bottom" Width="64"/>
+        <TextBlock x:Name="PlayerTurn" Foreground="Red" HorizontalAlignment="Left" Height="30" Margin="86,0,0,17" TextWrapping="Wrap" Text="X" VerticalAlignment="Bottom" Width="20"/>
     </Grid>
 </Window>
