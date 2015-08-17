@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using TicTacToeWPF.Core.Model;
 
 namespace TicTacToeWPF.Core.ViewModel
@@ -11,7 +13,7 @@ namespace TicTacToeWPF.Core.ViewModel
     {
 
         private Game _game;
-        private List<string> _grid;
+        private ICommand _gameCommand;
 
         public MainViewModel()
         {
@@ -19,7 +21,31 @@ namespace TicTacToeWPF.Core.ViewModel
             
         }
 
-        
+        public ICommand GameCommand
+        {
+            get
+            {
+                if(_gameCommand == null)
+                {
+                    _gameCommand = new RelayCommand(
+                        param => this.ExecuteCommand(param),
+                        param => this.CanExecute()
+                        );
+                }
+                return _gameCommand;
+            }
+        }
+
+        private bool CanExecute()
+        {
+            return true;
+        }
+
+        private void ExecuteCommand(object o)
+        {
+            Game.makeMove(Convert.ToInt32((string)o)-1);
+        }
+
         public Game Game
         {
             get { return _game; }
@@ -27,17 +53,6 @@ namespace TicTacToeWPF.Core.ViewModel
             {
                 _game = value;
                 OnPropertyChanged("Game");
-            }
-        }
-
-
-        public List<string> Grid
-        {
-            get { return _grid; }
-            set
-            {
-                _grid = value;
-                OnPropertyChanged("Grid");
             }
         }
     }
