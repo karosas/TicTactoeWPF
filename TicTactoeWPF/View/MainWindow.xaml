@@ -52,7 +52,9 @@ Color="White" Offset="1"/>
         </Grid>
         <Button x:Name="button" Content="RESET" Command="{Binding ResetCommand}" HorizontalAlignment="Right" Height="37" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="112"/>
         <TextBlock x:Name="textBlock" Foreground="White" HorizontalAlignment="Left" Height="30" Margin="10,0,0,17" TextWrapping="Wrap" Text="Player Turn: " VerticalAlignment="Bottom" Width="64"/>
-        <TextBlock x:Name="PlayerTurn" Foreground="Red" Text="{Binding Game.Turn, Converter={StaticResource turnConverter}, Mode=OneWay}" HorizontalAlignment="Left" Height="30" Margin="86,0,0,17" TextWrapping="Wrap"  VerticalAlignment="Bottom" Width="20"/>
+        <TextBlock x:Name="PlayerTurn" Foreground="Red" 
+                   Text="{Binding Game.Turn, Converter={StaticResource turnConverter}, Mode=OneWay, FallbackValue='Error'}"
+                   HorizontalAlignment="Left" Height="30" Margin="86,0,0,17" TextWrapping="Wrap"  VerticalAlignment="Bottom" Width="20"/>
 
     <!-- Game End Overlay -->
 

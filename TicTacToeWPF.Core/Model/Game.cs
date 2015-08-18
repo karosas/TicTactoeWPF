@@ -17,7 +17,7 @@ namespace TicTacToeWPF.Core.Model
         public Game()
         {
             initGrid();
-            _turn = 1;
+            Turn = 1;
             _gameEnd = false;
             moveCount = 0;
         }
@@ -33,10 +33,10 @@ namespace TicTacToeWPF.Core.Model
             if(_grid[index].Equals("") && !_gameEnd)
             {
                 moveCount++;
-                if (_turn == 1)
+                if (Turn == 1)
                 {
                     _grid[index] = "X";
-                    _turn = 2;
+                    Turn = 2;
                     if (checkForEnd(index))
                     {
                         _gameEnd = true;
@@ -49,7 +49,7 @@ namespace TicTacToeWPF.Core.Model
                 else
                 {
                     _grid[index] = "O";
-                    _turn = 1;
+                   Turn = 1;
                     if (checkForEnd(index))
                     {
                         _gameEnd = true;
@@ -157,7 +157,7 @@ namespace TicTacToeWPF.Core.Model
             for (int i = 0; i < 9; i++)
                 _grid[i] = "";
 
-            _turn = 1;
+            Turn = 1;
             _gameEnd = false;
             GameEndMessage = "";
             moveCount = 0;
