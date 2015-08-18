@@ -14,11 +14,16 @@ namespace TicTacToeWPF.Core.ViewModel
 
         private Game _game;
         private ICommand _gameCommand;
+        private ICommand _resetCommand;
+        private bool _buttonsEnabled;
+        private bool _gameEndOverlayEnabled;
+        private string _gameEndMessage;
 
         public MainViewModel()
         {
             _game = new Game();
             ButtonsEnabled = true;
+            GameEndOverlayEnabled = false;
         }
 
         public ICommand GameCommand
@@ -28,11 +33,26 @@ namespace TicTacToeWPF.Core.ViewModel
                 if(_gameCommand == null)
                 {
                     _gameCommand = new RelayCommand(
-                        param => this.ExecuteCommand(param),
+                        param => this.ExecuteGameCommand(param),
                         param => this.CanExecute()
                         );
                 }
                 return _gameCommand;
+            }
+        }
+
+        public ICommand ResetCommand
+        {
+            get
+            {
+                if (_resetCommand == null)
+                {
+                    _resetCommand = new RelayCommand(
+                        param => this.ExecuteResetCommand(),
+                        param => this.CanExecute()
+                        );
+                }
+                return _resetCommand;
             }
         }
 
@@ -41,16 +61,48 @@ namespace TicTacToeWPF.Core.ViewModel
             return true;
         }
 
-        private void ExecuteCommand(object o)
+        private void ExecuteGameCommand(object o)
         {
             Game.makeMove(Convert.ToInt32((string)o)-1);
             if(Game.GameEnd)
             {
-                
+                GameEndOverlayEnabled = true;
+                GameEndMessage = Game.GameEndMessage;
             }
         }
 
-        public bool ButtonsEnabled { get; set; }
+        private void ExecuteResetCommand()
+        {
+            Game.reset();
+        }
+
+        public bool ButtonsEnabled {
+            get { return _buttonsEnabled; }
+            set
+            {
+                _buttonsEnabled = value;
+                OnPropertyChanged("ButtonsEnabled");
+            }
+        }
+
+        public bool GameEndOverlayEnabled {
+            get { return _gameEndOverlayEnabled; }
+            set
+            {
+                _gameEndOverlayEnabled = value;
+                OnPropertyChanged("GameEndOverlayEnabled");
+            }
+        }
+
+        public string GameEndMessage
+        {
+            get { return _gameEndMessage; }
+            set
+            {
+                _gameEndMessage = value;
+                OnPropertyChanged("GameEndMessage");
+            }
+        }
 
         public Game Game
         {

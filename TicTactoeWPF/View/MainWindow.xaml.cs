@@ -30,7 +30,7 @@ namespace TicTactoeWPF
             InitializeComponent();
             turn = 1;
             viewModel = new MainViewModel();
-            BtnPanel.DataContext = viewModel;
+            LayoutRoot.DataContext = viewModel;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -107,6 +107,11 @@ namespace TicTactoeWPF
             turn++;
             if (turn > 2)
                 turn = 1;
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            OverlayBorder.Visibility = Visibility.Collapsed;
         }
 
         private void Reset_Click(object sender, RoutedEventArgs e)

@@ -12,12 +12,14 @@ namespace TicTacToeWPF.Core.Model
         private ObservableCollection<string> _grid;
         private int _turn;
         private bool _gameEnd;
+        private int moveCount;
 
         public Game()
         {
             initGrid();
             _turn = 1;
             _gameEnd = false;
+            moveCount = 0;
         }
 
         private void initGrid()
@@ -28,67 +30,108 @@ namespace TicTacToeWPF.Core.Model
 
         public void makeMove(int index)
         {
-            if(_grid[index].Equals(""))
+            if(_grid[index].Equals("") && !_gameEnd)
             {
+                moveCount++;
                 if (_turn == 1)
                 {
                     _grid[index] = "X";
+                    _turn = 2;
                     if (checkForEnd(index))
                     {
                         _gameEnd = true;
+                        GameEndMessage = "Player X Won!";
                         return;
                     }
                         
-                    _turn = 2;
+                    
                 }
                 else
                 {
                     _grid[index] = "O";
+                    _turn = 1;
                     if (checkForEnd(index))
                     {
                         _gameEnd = true;
+                        GameEndMessage = "Player O Won!";
                         return;
                     }
-                    _turn = 1;
+                    
                 }
+            }
+            if(moveCount >= 9)
+            {
+                _gameEnd = true;
+                GameEndMessage = "Tie!";
+                return;
             }
         }
 
         private bool checkForEnd(int index)
         {
-            int column = index / 3;
-            int row = index % 3; 
+            int column = index % 3;
+            int row = index / 3;
+
+            // It's impossible to win in less than 5 moves
+            if (moveCount < 5)
+                return false;
 
             // Check Row
-            if(_grid[row*3].Equals(_grid[row * 3 + 1]) 
-                && _grid[row * 3 + 1].Equals(_grid[row * 3 + 2]))
+            if (checkRow(row))
+                return true;
+            // Check Column
+            if (checkColumn(column))
+                return true;
+            // Check if diagonal is possible
+            if((index+1)%2 != 0)
+            {
+                if (checkDiagonals())
+                    return true;
+            }
+            return false;
+        }
+
+        private bool checkColumn(int column)
+        {
+            if (_grid[column].Equals(_grid[column + 3])
+                && _grid[column + 3].Equals(_grid[column + 6])
+                && !_grid[column * 3].Equals(""))
+            {
+                // WIN
+                return true;
+            }
+            return false;
+        }
+
+        private bool checkRow(int row)
+        {
+            if (_grid[row * 3].Equals(_grid[row * 3 + 1])
+                && _grid[row * 3 + 1].Equals(_grid[row * 3 + 2])
+                && !_grid[row * 3].Equals(""))
             {
                 // Win
                 return true;
             }
-            // Check Column
-            if(_grid[column*3].Equals(_grid[column*3+1])
-                && _grid[column * 3 + 1].Equals(_grid[column * 3 + 2])) {
-                // WIN
+            return false;
+        }
+
+        private bool checkDiagonals()
+        {
+            // Diagonal
+            if (_grid[0].Equals(_grid[4]) &&
+                _grid[4].Equals(_grid[8])
+                && !_grid[0].Equals(""))
+            {
+                // Win
                 return true;
             }
-            // Check if diagonal is possible
-            if((index+1)%2 != 0)
+            // Anti Diagonal
+            else if (_grid[2].Equals(_grid[4]) &&
+                _grid[4].Equals(_grid[6])
+                 && !_grid[2].Equals(""))
             {
-                // Diagonal
-                if(_grid[0].Equals(_grid[4]) &&
-                    _grid[4].Equals(_grid[8]))
-                {
-                    // Win
-                    return true;
-                }
-                // Anti Diagonal
-                else if(_grid[2].Equals(_grid[4]) &&
-                    _grid[4].Equals(_grid[6]))
-                {
-                    // Win
-                    return true;
-                }
+                // Win
+                return true;
             }
             return false;
         }
@@ -96,7 +139,10 @@ namespace TicTacToeWPF.Core.Model
         public int Turn
         {
             get { return _turn; }
-            set { _turn = value; }
+            set {
+                _turn = value;
+                OnPropertyChanged("Turn");
+            }
         }
 
         public bool GameEnd
@@ -108,9 +154,13 @@ namespace TicTacToeWPF.Core.Model
 
         public void reset()
         {
-            initGrid();
+            for (int i = 0; i < 9; i++)
+                _grid[i] = "";
+
             _turn = 1;
             _gameEnd = false;
+            GameEndMessage = "";
+            moveCount = 0;
         }
         
         public ObservableCollection<string> Grid
@@ -122,5 +172,7 @@ namespace TicTacToeWPF.Core.Model
                 OnPropertyChanged("Grid");
             }
         }
+
+        public string GameEndMessage { get; set; }
     }
 }
