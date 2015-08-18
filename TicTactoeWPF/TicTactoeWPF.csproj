@@ -64,6 +64,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BoolToVisibilityConverter.cs" />
+    <Compile Include="ReverseBoolToVisibilityConverter.cs" />
     <Compile Include="TurnToMarkConverter.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

@@ -27,6 +27,7 @@ namespace TicTactoeWPF
             InitializeComponent();
             viewModel = new MainViewModel();
             LayoutRoot.DataContext = viewModel;
+            MenuGrid.DataContext = viewModel; 
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
