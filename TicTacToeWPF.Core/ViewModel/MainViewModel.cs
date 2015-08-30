@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using TicTacToeWPF.Core.Model;
 
@@ -11,12 +6,12 @@ namespace TicTacToeWPF.Core.ViewModel
 {
     public class MainViewModel : Observable
     {
-
         private Game _game;
         private ICommand _gameCommand;
         private ICommand _resetCommand;
         private ICommand _gameModeCommand;
         private ICommand _difficultyCommand;
+        private ICommand _menuCommand;
         private bool _buttonsEnabled;
         private bool _gameEndOverlayEnabled;
         private string _gameEndMessage;
@@ -32,7 +27,7 @@ namespace TicTacToeWPF.Core.ViewModel
             _inMenu = true;
             _isAIMode = false;
         }
-
+        // Grid button commands
         public ICommand GameCommand
         {
             get
@@ -41,13 +36,13 @@ namespace TicTacToeWPF.Core.ViewModel
                 {
                     _gameCommand = new RelayCommand(
                         param => this.ExecuteGameCommand(param),
-                        param => this.CanExecute()
+                        param => this.canGameCommandExecute()
                         );
                 }
                 return _gameCommand;
             }
         }
-
+        // Reset game button command
         public ICommand ResetCommand
         {
             get
@@ -62,7 +57,7 @@ namespace TicTacToeWPF.Core.ViewModel
                 return _resetCommand;
             }
         }
-
+        // Game mode button command
         public ICommand GameModeCommand
         {
             get
@@ -77,7 +72,7 @@ namespace TicTacToeWPF.Core.ViewModel
                 return _gameModeCommand;
             }
         }
-
+        // Player vs. AI difficulty button command
         public ICommand DifficultyCommand
         {
             get
@@ -93,6 +88,40 @@ namespace TicTacToeWPF.Core.ViewModel
             }
         }
 
+        public ICommand MenuCommand
+        {
+            get
+            {
+                if (_menuCommand == null)
+                {
+                    _menuCommand = new RelayCommand(
+                        param => this.ExecuteMenuCommand(),
+                        param => this.CanExecute()
+                        );
+                }
+                return _menuCommand;
+            }
+        }
+        // Check whether it's Player vs AI mode and whether it's AI turn
+        private bool canGameCommandExecute()
+        {
+            if(Game.AiEnabled)
+            {
+                if(Game.AiTurn == Game.Turn)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
+        // Other buttons can execute always
         private bool CanExecute()
         {
             return true;
@@ -101,6 +130,12 @@ namespace TicTacToeWPF.Core.ViewModel
         private void ExecuteGameCommand(object o)
         {
             Game.makeMove(Convert.ToInt32((string)o)-1);
+
+            if (!Game.GameEnd)
+            {
+                Game.checkForAiTurns();
+            }
+
             if(Game.GameEnd)
             {
                 GameEndOverlayEnabled = true;
@@ -130,12 +165,22 @@ namespace TicTacToeWPF.Core.ViewModel
         public void ExecuteDifficultyCommand(object o)
         {
             if(((string)o).Equals("easy")) {
+                Game.enableAi("easy");
                 _isEasyAi = true;
             } else
             {
+                Game.enableAi("hard");
                 _isEasyAi = false;
             }
             InMenu = false;
+        }
+
+        public void ExecuteMenuCommand()
+        {
+            ButtonsEnabled = true;
+            GameEndOverlayEnabled = false;
+            _inMenu = true;
+            _isAIMode = false;
         }
         
 
